@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pokemon Generator</title>
+  <style>
+    body {
+      margin: auto;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: aliceblue;
+    }
+
+    .container {
+      border: 1px solid black;
+      height: 500px;
+      width: 500px;
+      text-align: center;
+      background-color: rgb(106, 106, 207);
+      padding: 20px;
+      border-radius: 10px;
+      border-color: rgb(106, 106, 207);;
+    }
+    
+    .title-box2 {
+      background-color: lightblue;
+      padding: 15px;
+      border: 2px solid #333;
+      border-radius: 10px;
+      display: inline-block;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      width: 470px;
+    }
+
+    .title-box2 {
+      margin-top: 20px;
+    }
+
+    img {
+      height: 150px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title-box">
+      <h1>Pokemon Generator</h1>
+    </div>
+    <div class="pokemon">
+      <h2 id="pokemonName">Loading....</h2>
+      <img src="" id="pokemonImg" alt="Pokemon Image">
+
+
+      <div class="title-box2">
+        <h2 id="pokemontype">Type:</h2>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const nameElement = document.getElementById("pokemonName");
+    const imageElement = document.getElementById("pokemonImg");
+    const typeElement = document.getElementById("pokemontype");
+
+    function fetchPokemonId(pokemonId){
+      fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          nameElement.textContent = data.name.toUpperCase();
+          imageElement.src = data.sprites.front_default;
+          typeElement.textContent = "Type: " + data.types[0].type.name;
+        })
+        .catch(error => {
+          console.log("Error fetching data:", error);
+          nameElement.textContent = "Error loading Pokémon.";
+        });
+    }
+
+    imageElement.addEventListener("click", () => {
+      const randomId = Math.floor(Math.random() * 151) + 1;
+      fetchPokemonId(randomId);
+    });
+
+  
+    fetchPokemonId(Math.floor(Math.random() * 151) + 1);
+  </script>
+</body>
+</html>
+
+
+
+
