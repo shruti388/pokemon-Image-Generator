@@ -5,7 +5,7 @@ This is an interactive pokemon image gnerator,where users can simply see random 
 🚀 Tech stack used: HTML, CSS, JAVASCRIPT.
 <hr>
 
-license: MIT.
+License: MIT.
 <hr>
 
 Visit my website using this link: https://shruti388.github.io/pokemon-Image-Generator/
